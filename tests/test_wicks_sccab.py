@@ -35,6 +35,7 @@ def test_title():
 
 def test_description():
     assert parsed_items[0]["description"] == ""
+    assert parsed_items[2]["description"] == "CANCELLED"
 
 
 def test_start():
@@ -58,6 +59,7 @@ def test_id():
 
 def test_status():
     assert parsed_items[0]["status"] == "passed"
+    assert parsed_items[2]["status"] == "cancelled"
 
 
 def test_location():
@@ -85,6 +87,13 @@ def test_links():
             "href": "https://www.sedgwickcounty.org/media/65966/1-11-24-minutes.docx",
         },
     ]
+    assert parsed_items[1]["links"] == [
+        {
+            "title": "Agenda",
+            "href": "https://www.sedgwickcounty.org/media/65949/02-08-24-agenda.docx",
+        },
+    ]
+    assert parsed_items[2]["links"] == []
 
 
 def test_classification():

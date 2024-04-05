@@ -26,7 +26,7 @@ class WicksSccabSpider(CityScrapersSpider):
         for item in response.css("h4:nth-of-type(2) + *").css("li"):
             meeting = Meeting(
                 title="Community Corrections Advisory Board Monthly Meeting",
-                description="",
+                description=self._parse_description(item),
                 classification=BOARD,
                 start=self._parse_start(item, start_time),
                 end=self._parse_end(item, end_time),
@@ -41,6 +41,15 @@ class WicksSccabSpider(CityScrapersSpider):
             meeting["id"] = self._get_id(meeting)
 
             yield meeting
+
+    def _parse_description(self, item):
+        """
+        Parse description.
+        Used to indicate if meeting has been cancelled.
+        Helps _get_status function set status correctly.
+        """
+        text = item.get().lower()
+        return "CANCELLED" if "cancel" in text else ""
 
     def _parse_date(self, item):
         """Parse date with regex. Used in multiple functions."""
