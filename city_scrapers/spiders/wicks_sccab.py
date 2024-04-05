@@ -16,9 +16,7 @@ class WicksSccabSpider(CityScrapersSpider):
     ]
 
     def parse(self, response):
-        """
-        `parse` should always `yield` Meeting items.
-        """
+        """Parse meeting items from agency website."""
         start_time = "8 a.m."
         end_time = "9 a.m."
         location = {
@@ -45,24 +43,33 @@ class WicksSccabSpider(CityScrapersSpider):
             yield meeting
 
     def _parse_date(self, item):
-        """Parse date"""
-        date = re.search(r"\D+ \d+, \d+", item.css("::text").get()).group()
-        return date
+        """Parse date with regex. Used in multiple functions."""
+        return re.search(r"\D+ \d+, \d+", item.css("::text").get()).group()
 
     def _parse_start(self, item, start_time):
-        """Parse start datetime as a naive datetime object."""
+        """
+        Parse start datetime as a naive datetime object.
+        Combine date from page and hardcoded time.
+        """
         date = self._parse_date(item)
         parsed_datetime = parse(f"{date} {start_time}")
         return parsed_datetime
 
     def _parse_end(self, item, end_time):
-        """Parse end datetime as a naive datetime object. Added by pipeline if None"""
+        """
+        Parse end datetime as a naive datetime object.
+        Combine date from page and hardcoded time.
+        """
         date = self._parse_date(item)
         parsed_datetime = parse(f"{date} {end_time}")
         return parsed_datetime
 
     def _parse_links(self, response, item):
-        """Parse or generate links."""
+        """
+        Parse links. Agenda for date is sometimes present.
+        Minutes link for year is usually present.
+        Add both if found.
+        """
         output = []
         links = item.css("a")
         for link in links:

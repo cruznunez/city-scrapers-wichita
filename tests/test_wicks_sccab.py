@@ -22,11 +22,15 @@ parsed_items = [item for item in spider.parse(test_response)]
 freezer.stop()
 
 
+def test_count():
+    assert len(parsed_items) == 12
+
+
 def test_title():
     assert (
         parsed_items[0]["title"]
         == "Community Corrections Advisory Board Monthly Meeting"
-    )  # noqa
+    )
 
 
 def test_description():
@@ -67,7 +71,7 @@ def test_source():
     assert (
         parsed_items[0]["source"]
         == "https://www.sedgwickcounty.org/corrections/corrections-advisory-boards/"
-    )  # noqa
+    )
 
 
 def test_links():
