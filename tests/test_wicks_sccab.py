@@ -23,7 +23,10 @@ freezer.stop()
 
 
 def test_title():
-    assert parsed_items[0]["title"] == "Community Corrections Advisory Board Monthly Meeting"
+    assert (
+        parsed_items[0]["title"]
+        == "Community Corrections Advisory Board Monthly Meeting"
+    )  # noqa
 
 
 def test_description():
@@ -43,7 +46,10 @@ def test_time_notes():
 
 
 def test_id():
-    assert parsed_items[0]["id"] == "wicks_sccab/202401110800/x/community_corrections_advisory_board_monthly_meeting"
+    assert (
+        parsed_items[0]["id"]
+        == "wicks_sccab/202401110800/x/community_corrections_advisory_board_monthly_meeting"  # noqa
+    )
 
 
 def test_status():
@@ -53,23 +59,27 @@ def test_status():
 def test_location():
     assert parsed_items[0]["location"] == {
         "name": "Adult Field Services",
-        "address": "905 N. Main, Wichita, Kansas"
+        "address": "905 N. Main, Wichita, Kansas",
     }
 
 
 def test_source():
-    assert parsed_items[0]["source"] == "https://www.sedgwickcounty.org/corrections/corrections-advisory-boards/"
+    assert (
+        parsed_items[0]["source"]
+        == "https://www.sedgwickcounty.org/corrections/corrections-advisory-boards/"
+    )  # noqa
 
 
 def test_links():
-    assert parsed_items[0]["links"] == [{
-        'title': 'Agenda',
-        'href': 'https://www.sedgwickcounty.org/media/65739/01-11-24-agenda.docx'
-    },
-    {
-        'title': 'Minutes',
-        'href': 'https://www.sedgwickcounty.org/media/65966/1-11-24-minutes.docx',
-    }
+    assert parsed_items[0]["links"] == [
+        {
+            "title": "Agenda",
+            "href": "https://www.sedgwickcounty.org/media/65739/01-11-24-agenda.docx",
+        },
+        {
+            "title": "Minutes",
+            "href": "https://www.sedgwickcounty.org/media/65966/1-11-24-minutes.docx",
+        },
     ]
 
 
